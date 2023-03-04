@@ -4,9 +4,11 @@ const bodyParser = require('body-parser')
 const axios = require('axios')
 const cookieParser = require('cookie-parser')
 const cors = require('cors')
+const cron = require('node-cron');
 const app = express()
 const { PORT } = process.env
 const routes = require('./router')
+const { update_ATPT_OFCDC_SC_CODE } = require('./modules/ATPT_OFCDC_SC_CODE.js')
 const corsOption = {
   cors: {
     origin: "*",
@@ -16,6 +18,12 @@ const corsOption = {
   },
   allowEIO3: true,
 }
+
+// update_ATPT_OFCDC_SC_CODE()
+cron.schedule('* * 0 * * *', function(){
+  console.log('node-cron 실행됨')
+  update_ATPT_OFCDC_SC_CODE()
+});
 
 let isDisableKeepAlive = false
 app.use(function (req, res, next) {
