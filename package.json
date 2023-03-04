@@ -1,6 +1,6 @@
 {
   "name": "vue3-study-backend",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "",
   "main": "app.js",
   "scripts": {
@@ -26,6 +26,7 @@
     "dotenv": "^16.0.3",
     "express": "^4.18.2",
     "mysql": "^2.18.1",
+    "node-cron": "^3.0.2",
     "nodemon": "^2.0.21"
   }
 }
