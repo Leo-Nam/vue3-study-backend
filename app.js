@@ -9,6 +9,7 @@ const app = express()
 const { PORT } = process.env
 const routes = require('./router')
 const { update_ATPT_OFCDC_SC_CODE } = require('./modules/ATPT_OFCDC_SC_CODE.js')
+const { get_bcode_list } = require('./modules/getStanReginCdList.js')
 const corsOption = {
   cors: {
     origin: "*",
@@ -20,9 +21,23 @@ const corsOption = {
 }
 
 // update_ATPT_OFCDC_SC_CODE()
-cron.schedule('* * 0 * * *', function(){
-  console.log('node-cron 실행됨')
+// cron
+// 1. second: 0-59
+// 2. minute: 0-59
+// 3. hour: 0-23
+// 4. day of month: 1-31
+// 5. month: 1-12
+// 6. day of week: 0-7 (0 또는 7이 일요일임)
+cron.schedule('* * 0 * * *', function(){ //매일 밤 0시에 실행됨
+  console.log('교습소 등록 자료 크롤링 시작함')
   update_ATPT_OFCDC_SC_CODE()
+});
+
+// get_bcode_list()
+cron.schedule('* * 6 1 * *', function(){ //매월 1일 밤 오전 6시에 실행됨
+  console.log('법정동 코드 업데이트 실행됨')
+  get_bcode_list()
+()
 });
 
 let isDisableKeepAlive = false
