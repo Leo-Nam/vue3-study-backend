@@ -3,5 +3,5 @@
 
 // addrLinkApi()
 
-const { update_ATPT_OFCDC_SC_CODE, get_ATPT_OFCDC_SC_CODE } = require('./modules/ATPT_OFCDC_SC_CODE.js')
-get_ATPT_OFCDC_SC_CODE('B10', 1)
+const { update_ATPT_OFCDC_SC_CODE } = require('./modules/ATPT_OFCDC_SC_CODE.js')
+update_ATPT_OFCDC_SC_CODE()
