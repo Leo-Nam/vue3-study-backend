@@ -31,14 +31,16 @@ const corsOption = {
 // 5. month: 1-12
 // 6. day of week: 0-7 (0 또는 7이 일요일임)
 cron.schedule('* * 0 * * *', function(){ //매일 밤 0시에 실행됨
-  console.log('교습소 등록 자료 크롤링 시작함')
+  console.log('교습소 등록 자료 크롤링 cron 시작')
   update_ATPT_OFCDC_SC_CODE()
+  console.log('교습소 등록 자료 크롤링 cron 완료')
 });
 
 // get_bcode_list()
 cron.schedule('* * 6 1 * *', function(){ //매월 1일 밤 오전 6시에 실행됨
-  console.log('법정동 코드 업데이트 실행됨')
+  console.log('법정동 코드 업데이트 cron 시작')
   get_bcode_list()
+  console.log('법정동 코드 업데이트 cron 완료')
 ()
 });
 
