@@ -7,7 +7,7 @@ const get_bcode_list = async () => {
   let sidoIndex = 0
   const timerInterval = 5000
   const getStanReginCdList = async (pageNo) => {
-    const apiKey = 'jTGICRNHia7RIWOWFRjAIELkyJfmF6i3hHlzfCq%2FqGWquHopc8rQ8yPZd98HA%2FUKO%2Fvib8FJXAwRoAny5%2FMxyA%3D%3D'
+    const apiKey = dataGoKr_apiKey
     let numOfRows = 1000
   
     const host = 'http://apis.data.go.kr/1741000/StanReginCd/getStanReginCdList'

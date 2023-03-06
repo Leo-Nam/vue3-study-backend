@@ -9,7 +9,7 @@ let timerInterval = 30000
 let searchedArray = []
 const get_ATPT_OFCDC_SC_CODE = async (code, pageNo) => {
   // console.log('get_ATPT_OFCDC_SC_CODE')
-  const apiKey = 'fd0b9953e0d44d3f8739719f9a3d25dc'
+  const apiKey = process.env.ATPT_OFCDC_SC_CODE_API_KEY
   const pageSize = 1000
   const url = 'https://open.neis.go.kr/hub/acaInsTiInfo?ATPT_OFCDC_SC_CODE=' + code +'&KEY=' + apiKey + '&Type=json&pIndex=' + pageNo + '&pSize=' + pageSize   
   // console.log({url})
