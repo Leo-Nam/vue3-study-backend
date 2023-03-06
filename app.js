@@ -20,7 +20,7 @@ const corsOption = {
   allowEIO3: true,
 }
 
-update_ATPT_OFCDC_SC_CODE()
+// update_ATPT_OFCDC_SC_CODE()
 
 // update_ATPT_OFCDC_SC_CODE()
 // cron
