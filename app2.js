@@ -1,4 +1,5 @@
 const axios = require('axios')
+var convert = require('xml-js')
 const { postApi } = require('./api.js')
 
 let pageNo = 1
@@ -6,57 +7,28 @@ let officeList = []
 let officeLength = 0
 let officeIndex = 0
 const timerInterval = 2000
-const get_ATPT_OFCDC_SC_CODE = async (code, pageNo) => {
-  console.log('get_ATPT_OFCDC_SC_CODE')
-  const apiKey = 'fd0b9953e0d44d3f8739719f9a3d25dc'
+const getRTMSDataSvcAptTradeDev = async () => {
+  const apiKey = 'jTGICRNHia7RIWOWFRjAIELkyJfmF6i3hHlzfCq%2FqGWquHopc8rQ8yPZd98HA%2FUKO%2Fvib8FJXAwRoAny5%2FMxyA%3D%3D'
   const pageSize = 100
-  const url = 'https://open.neis.go.kr/hub/acaInsTiInfo?ATPT_OFCDC_SC_CODE=' + code +'&KEY=' + apiKey + '&Type=json&pIndex=' + pageNo + '&pSize=' + pageSize   
+  const host = 'http://openapi.molit.go.kr/OpenAPI_ToolInstallPackage/service/rest/RTMSOBJSvc/getRTMSDataSvcAptTradeDev?_wadl&type=xml'
+  var queryParams = '?' + encodeURIComponent('serviceKey') + '=' + apiKey /* Service Key*/
+  queryParams += '&' + encodeURIComponent('pageNo') + '=' + encodeURIComponent('1') /* */
+  queryParams += '&' + encodeURIComponent('numOfRows') + '=' + encodeURIComponent('1') /* */
+  queryParams += '&' + encodeURIComponent('LAWD_CD') + '=' + encodeURIComponent('11110') /* */
+  queryParams += '&' + encodeURIComponent('DEAL_YMD') + '=' + encodeURIComponent('202001'); /* */
+
+  const url = host + queryParams
   console.log({url})
-  const method = 'get'
-  const data = null
-  console.log({data})
-  // const response = await this.$store.dispatch('common/caller', { callee, data })
   const response = await axios.get(url)
-  console.log(response.data.acaInsTiInfo, '123')
-  return response.data.acaInsTiInfo
+  // console.log(response.data, '123')
+  var xmlData = convert.xml2json(response.data, {
+      compact: true,
+      space: 4
+  });
+  const jsonData = JSON.parse(xmlData)
+  // console.log({jsonData}, '789');
+  // console.log({jsonData}, '789');
+  // return response.data.acaInsTiInfo
 }
 
-const sp_get_education_office = async () => {
-  const caller = 'caller'
-  const data = {
-    callee: 'sp_get_education_office',
-    req: null
-  }
-  try {
-    await postApi(caller, JSON.stringify(data), function(response){
-      console.log('postApi 호출이 발생했습니다. 입력 데이타는 다음과 같습니다.', {data})
-      console.log('postApi 호출결과는 다음과 같습니다.', {response})
-      console.log(response.data.data)
-      officeList = response.data.data
-      officeLength = officeList.length
-    })
-  } catch(e) {
-    console.log({e})
-  }
-}
-
-const update_ATPT_OFCDC_SC_CODE = async () => {
-  await sp_get_education_office()
-  const timer1 = setInterval(async () => {
-    let response = await get_ATPT_OFCDC_SC_CODE(officeList[officeIndex].code, pageNo++)
-    console.log({response}, 1)
-    if (response == undefined){
-      if (officeIndex < officeLength) {
-        officeIndex ++
-        pageNo = 1
-      } else {
-        clearInterval(timer1)
-      }
-      console.log('모든 자료 검색이 완료되었습니다.')
-    }
-  }, timerInterval);
-}
-
-exports.modules = {
-  update_ATPT_OFCDC_SC_CODE
-}
+getRTMSDataSvcAptTradeDev()
