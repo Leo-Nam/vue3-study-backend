@@ -37,7 +37,7 @@ cron.schedule('0 1 * * *', () => { //매일 새벽 1시에 실행됨
 });
 
 // get_bcode_list()
-cron.schedule('* 6 1 * *', () => { //매월 1일 밤 오전 6시에 실행됨
+cron.schedule('0 6 1 * *', () => { //매월 1일 밤 오전 6시에 실행됨
   console.log('법정동 코드 업데이트 cron 시작')
   get_bcode_list()
   console.log('법정동 코드 업데이트 cron 완료')
