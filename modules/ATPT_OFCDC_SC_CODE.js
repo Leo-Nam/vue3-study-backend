@@ -1,3 +1,4 @@
+require('dotenv').config()
 const axios = require('axios')
 const { postApi } = require('../api.js')
 
@@ -16,8 +17,8 @@ const get_ATPT_OFCDC_SC_CODE = async (code, pageNo) => {
   const method = 'get'
   // const data = null
   // console.log({data})
-  // const response = await this.$store.dispatch('common/caller', { callee, data })
   const response = await axios.get(url)
+  // console.log(response.data.acaInsTiInfo)
   return response
 }
 
