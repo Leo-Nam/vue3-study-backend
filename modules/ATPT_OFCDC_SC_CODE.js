@@ -103,6 +103,7 @@ const update_ATPT_OFCDC_SC_CODE = async () => {
       // 전체 교육청에 대한 작업이 완료된 경우에는 타이머를 삭제한다.
       clearInterval(timer1)
       console.log('전체 시도교육청', officeList.length, '개소에 대한 사교육 등록자료 분석작업을 완료하였습니다.')
+      return
     }
   }, timerInterval);
 }
