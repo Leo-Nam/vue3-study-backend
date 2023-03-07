@@ -25,9 +25,13 @@ const addrLinkApi = async () => {
         const faRdnma = resData.FA_RDNMA
         maxId = resData.MAX_ID
         // console.log('교습소', id, '번에 대한 도로명주소입니다.', {faRdnma})
-        await getRoadAddrDetails(id, faRdnma, function(res){
-          console.log({maxId, res})
-        })
+        if (faRdnma !== null) {
+          await getRoadAddrDetails(id, faRdnma, function(res){
+            console.log({maxId, res})
+          })
+        } else {
+          console.log('교습소', id, '번은 도로명주소가 등록되어 있지 않습니다.')
+        }
         console.log({maxId})
         finishedArray.push(id)
         id = resData.NEXT_ID
@@ -61,30 +65,37 @@ const addrLinkApi = async () => {
       roadAddrDetails = response.data.results.juso
     }
     // console.log(response.data.results.juso)    
-  
-    try {
-      callee = 'sp_insert_BUILDING'
-      const data = {
-        callee,
-        req: {
-          id,
-          roadAddrDetails
+    if (roadAddrDetails !== null) {
+      try {
+        callee = 'sp_insert_BUILDING'
+        const data = {
+          callee,
+          req: {
+            id,
+            roadAddrDetails
+          }
         }
+        console.log(keyword, '에 대한 도로상세주소 정리를 시작합니다.', {roadAddrDetails})
+        postApi('caller', JSON.stringify(data), await function(res){
+          // 데이타베이스 저장 및 업데이트 처리를 위한 작업을 진행한다.
+          // 교육청 서버로부터 받은 데이타를 로컬 서버에 이전하는 단계이다.
+          // console.log('postApi 호출이 발생했습니다. 입력 데이타는 다음과 같습니다.', {data})
+          const resData = res.data.data
+          // console.log({resData}, '5555')
+          let message = ''
+          if (res.state == 0) {
+            message = '교습소 등록번호' + id + '에 대한 도로상세주소 정리를 완료되었습니다.'
+          } else {
+            message = '교습소 등록번호' + id + '에 대한 도로상세주소 정리중 오류가 발생했습니다.([' + res.state + ']' + res.message + ')'
+          }
+          return callback(message)
+        })
+      } catch(e) {
+        console.log({e})
+        return callback(e)
       }
-      console.log(keyword, '에 대한 도로상세주소 정리를 시작합니다.')
-      postApi('caller', JSON.stringify(data), await function(res){
-        // 데이타베이스 저장 및 업데이트 처리를 위한 작업을 진행한다.
-        // 교육청 서버로부터 받은 데이타를 로컬 서버에 이전하는 단계이다.
-        // console.log('postApi 호출이 발생했습니다. 입력 데이타는 다음과 같습니다.', {data})
-        const resData = res.data.data
-        // console.log({resData})
-        const message = keyword + '에 대한 도로상세주소 정리를 완료되었습니다.([' + res.state + ']' + res.message + ')'
-        console.log(keyword, '에 대한 도로상세주소 정리를 완료되었습니다.[', res.state, ']', res.message)
-        return callback(message)
-      })
-    } catch(e) {
-      console.log({e})
-      return callback(e)
+    } else {
+      console.log(keyword, '에 대한 도로상세주소 정보가 존재하지 않습니다.', {roadAddrDetails})
     }
   }
 }
