@@ -3,7 +3,7 @@ module.exports = {
     {
       name: 'roadAddr-collector',
       script: './app2.js',
-      instances: 1,
+      instances: 2,
       exec_mode: 'cluster',
       wait_ready: true,
       listen_timeout: 50000,
