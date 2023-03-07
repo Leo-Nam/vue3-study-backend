@@ -1,7 +1,7 @@
 module.exports = {
   apps: [
     {
-      name: 'vue3-study',
+      name: 'roadAddr-collector',
       script: './app2.js',
       instances: 1,
       exec_mode: 'cluster',
