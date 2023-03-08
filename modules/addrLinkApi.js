@@ -7,7 +7,7 @@ const addrLinkApi = async () => {
   let id = 1
   let maxId = 10
   let nextId = 2
-  const timerInterval = 5000
+  const timerInterval = 2500
   const addrLinkApiKey = process.env.addrLinkApiKey
   const timer1 = setInterval(async () => {
     try {
