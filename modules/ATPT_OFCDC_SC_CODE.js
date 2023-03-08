@@ -66,7 +66,7 @@ const update_ATPT_OFCDC_SC_CODE = async () => {
           // searchResult에 어떠한 값도 없는 경우에는 검색한 모든 페이지의 마지막이라고 간주한다.
           // 다음 교육청으로 교육청 인덱스를 옮기고 페이지 번호는 1페이지로 리셋한다.
           console.log(officeList[officeIndex].name, '에 대하여 모든 자료 검색이 완료되었습니다.')
-          console.log(officeList[officeIndex + 1].name, '에 대한 자료 검색을 준비합니다.')
+          if (officeIndex < officeLength - 1) console.log(officeList[officeIndex + 1].name, '에 대한 자료 검색을 준비합니다.')
           officeIndex = officeIndex + 1
           pageNo = 1
         } else {
