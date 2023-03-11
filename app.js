@@ -34,9 +34,9 @@ const corsOption = {
 // 6. day of week: 0-7 (0 또는 7이 일요일임)
 
 // addrLinkApi()
-kyoboBookCrawler(function(response){
-  console.log({response})
-})
+// kyoboBookCrawler(function(response){
+//   console.log({response})
+// })
 
 cron.schedule('0 1 * * *', () => { //매일 새벽 1시에 실행됨
   console.log('교습소 등록 자료 크롤링 cron 시작')
