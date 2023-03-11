@@ -84,7 +84,7 @@ const addrLinkApi = async () => {
           // console.log({resData}, '5555')
           let message = ''
           if (res.state == 0) {
-            message = '교습소 등록번호' + id + '에 대한 도로상세주소 정리를 완료되었습니다.'
+            message = '교습소 등록번호' + id + '에 대한 도로상세주소 정리가 완료되었습니다.'
           } else {
             message = '교습소 등록번호' + id + '에 대한 도로상세주소 정리중 오류가 발생했습니다.([' + res.state + ']' + res.message + ')'
           }

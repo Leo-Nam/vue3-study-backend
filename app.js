@@ -11,6 +11,7 @@ const routes = require('./router')
 const { update_ATPT_OFCDC_SC_CODE } = require('./modules/ATPT_OFCDC_SC_CODE.js')
 const { get_bcode_list } = require('./modules/getStanReginCdList.js')
 const { addrLinkApi } = require('./modules/addrLinkApi.js')
+const {kyoboBookCrawler} = require('./modules/kyoboBooks.js')
 const corsOption = {
   cors: {
     origin: "*",
@@ -32,7 +33,10 @@ const corsOption = {
 // 5. month: 1-12
 // 6. day of week: 0-7 (0 또는 7이 일요일임)
 
-addrLinkApi()
+// addrLinkApi()
+kyoboBookCrawler(function(response){
+  console.log({response})
+})
 
 cron.schedule('0 1 * * *', () => { //매일 새벽 1시에 실행됨
   console.log('교습소 등록 자료 크롤링 cron 시작')
