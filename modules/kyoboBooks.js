@@ -14,8 +14,8 @@ const timerInterval = 2000
 
 const kyoboBookCrawler = async (callback) => {
   let page = 1
-  let bookList = []
   const timer1 = setInterval(async () => {
+    let bookList = []
     console.log(page, '페이지에 대한 검색이 시작됩니다.')
     try {
       fetch(`https://search.kyobobook.co.kr/search?keyword=vocabulary&target=total&gbCode=TOT&page=${page}`).then(async (response) => {
